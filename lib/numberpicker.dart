@@ -30,6 +30,7 @@ class NumberPicker extends StatelessWidget {
     this.zeroPad = false,
     this.highlightSelectedValue = true,
     this.decoration,
+    this.isBorder = true,
   })  : assert(initialValue != null),
         assert(minValue != null),
         assert(maxValue != null),
@@ -64,6 +65,7 @@ class NumberPicker extends StatelessWidget {
     this.zeroPad = false,
     this.highlightSelectedValue = true,
     this.decoration,
+    this.isBorder = true,
   })  : assert(initialValue != null),
         assert(minValue != null),
         assert(maxValue != null),
@@ -100,6 +102,7 @@ class NumberPicker extends StatelessWidget {
     this.listViewWidth = kDefaultListViewCrossAxisSize,
     this.highlightSelectedValue = true,
     this.decoration,
+    this.isBorder = true,
   })  : assert(initialValue != null),
         assert(minValue != null),
         assert(maxValue != null),
@@ -190,7 +193,7 @@ class NumberPicker extends StatelessWidget {
   //----------------------------- PUBLIC ------------------------------
   //
 
-  final bool isBorder = true;
+  final bool isBorder;
 
   /// Used to animate integer number picker to new selected value
   void animateInt(int valueToSelect) {
