@@ -190,6 +190,8 @@ class NumberPicker extends StatelessWidget {
   //----------------------------- PUBLIC ------------------------------
   //
 
+  final bool isBorder = true;
+
   /// Used to animate integer number picker to new selected value
   void animateInt(int valueToSelect) {
     int diff = valueToSelect - minValue;
@@ -279,12 +281,33 @@ class NumberPicker extends StatelessWidget {
 
                   return isExtra
                       ? new Container() //empty first and last element
-                      : new Center(
-                          child: new Text(
-                            getDisplayedValue(value),
-                            style: itemStyle,
-                          ),
-                        );
+                      : Center(
+                          child: value == selectedIntValue
+                              ? Container(
+                                  decoration: isBorder
+                                      ? BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              color: Color(0xff19b1d8)),
+                                          shape: BoxShape.rectangle)
+                                      : null,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 20,
+                                        top: 12,
+                                        bottom: 12,
+                                        right: 20),
+                                    child: SizedBox(
+                                        child: FittedBox(
+                                            child: Text(value.toString(),
+                                                style: itemStyle))),
+                                  ),
+                                )
+                              : SizedBox(
+                                  child: FittedBox(
+                                      child: Text(value.toString(),
+                                          style: itemStyle))));
                 },
               ),
               _NumberPickerSelectedItemDecoration(
@@ -533,7 +556,8 @@ class NumberPicker extends StatelessWidget {
   /// Use it only when user manually stops scrolling in infinite loop
   void _animateIntWhenUserStoppedScrolling(int valueToSelect) {
     // estimated index of currently selected element based on offset and item extent
-    int currentlySelectedElementIndex = intScrollController.offset ~/ itemExtent;
+    int currentlySelectedElementIndex =
+        intScrollController.offset ~/ itemExtent;
 
     // when more(less) than half of the top(bottom) element is hidden
     // then we should increment(decrement) index in case of positive(negative) offset
